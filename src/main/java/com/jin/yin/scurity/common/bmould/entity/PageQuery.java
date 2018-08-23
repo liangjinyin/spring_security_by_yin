@@ -1,7 +1,4 @@
-package com.jin.yin.scurity.modelus.entity;
-
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Value;
+package com.jin.yin.scurity.common.bmould.entity;
 
 /**
  * @author: liangjinyin

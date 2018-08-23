@@ -1,11 +1,10 @@
-package com.jin.yin.scurity.modelus.controller;
+package com.jin.yin.scurity.common.bmould.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.jin.yin.scurity.common.enums.ResultCode;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 
@@ -15,10 +14,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author: liangjinyin
+ * @date: 2018/8/23 10:24
+ * @description:
+ */
+@Slf4j
 public abstract class BaseController {
 
-    protected Logger logger = LoggerFactory.getLogger(getClass());
-    protected ResultCode resCode = null;
+    protected ResultCode resCode = ResultCode.OPERATION_SUCCESSED;
     protected Object data = null;
 
 
@@ -46,7 +50,10 @@ public abstract class BaseController {
              */
             resCode = ResultCode.NONE;
         }
-
+        if (data instanceof ResultCode) {
+            resCode = (ResultCode) data;
+            data = null;
+        }
         result.put("data", data);
         status.put("code", resCode.getResultCode());
         status.put("msg", resCode.getResultMsg());
@@ -75,7 +82,7 @@ public abstract class BaseController {
 
     public void setErrorResultCode(BindingResult result) {
         List<ObjectError> list = result.getAllErrors();
-        resCode = ResultCode.createResultCode(list.get(0).getDefaultMessage());
+        resCode = ResultCode.createCustomResultCode(list.get(0).getDefaultMessage());
         data = null;
     }
 

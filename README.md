@@ -1,3 +1,3 @@
 # spring_security_by_yin
 
-这个是本人写的一个基于springboot+spring security三方登陆的demo
+基于springboot+spring security三方（微信、QQ）登陆的demo

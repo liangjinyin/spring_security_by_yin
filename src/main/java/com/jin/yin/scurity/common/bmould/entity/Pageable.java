@@ -1,4 +1,4 @@
-package com.jin.yin.scurity.modelus.entity;
+package com.jin.yin.scurity.common.bmould.entity;
 
 import org.apache.commons.lang3.StringUtils;
 

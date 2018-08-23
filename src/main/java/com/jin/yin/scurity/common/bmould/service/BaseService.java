@@ -1,4 +1,4 @@
-package com.jin.yin.scurity.modelus.service;
+package com.jin.yin.scurity.common.bmould.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -17,6 +17,7 @@ import java.util.Map;
  */
 @Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)
+@Slf4j
 public abstract class BaseService {
 
     protected int total = 0;

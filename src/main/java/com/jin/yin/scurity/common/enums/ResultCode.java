@@ -1,9 +1,9 @@
 package com.jin.yin.scurity.common.enums;
 
 /**
- * User: liangjinyin
- * Date: 2018-08-07
- * Time: 15:09
+ * @author: liangjinyin
+ * @date:  2018/8/23 11:09
+ * @description: 
  */
 public enum ResultCode {
     /**
@@ -29,6 +29,8 @@ public enum ResultCode {
     USER_PASSWORD_ERROR("104", "密码错误"),
     USER_PASSWORD_NEW_SAMEWITH_OLD("105", "新密码和旧密码一样"),
     USER_PASSWORD_EMPTY("106", "密码为空"),
+    USER_USERNAME_ISEMPTY("107", "用户名不能为空"),
+    USER_PASSWORD_ISEMPTY("108", "密码不能为空"),
 
     USER_NOTEXIST("201", "用户不存在"),
     USER_MOBILE_EXIST("203", "手机号已被使用"),

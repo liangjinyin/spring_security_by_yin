@@ -18,7 +18,7 @@ public class SecutiryConfigration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
             .authorizeRequests()
-                .antMatchers("/druid/*")
+                .antMatchers("/druid/*","/user/*")
                 .permitAll();
     }
 }
