@@ -1,11 +1,9 @@
 package com.jin.yin.scurity.common.aspect;
 
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -23,9 +21,9 @@ import java.util.Arrays;
 public class ParamAspect {
     /**
      * 获取方法执行时间，和方法参数
-     * @param point
-     * @return
-     * @throws Throwable
+     * @param point 查重
+     * @return object
+     * @throws Throwable 查重
      */
     @Around("execution(* com.jin.yin.scurity.modelus.system..*Controller.*(..))")
     public Object paramHandle(ProceedingJoinPoint point) throws Throwable {
@@ -39,7 +37,7 @@ public class ParamAspect {
         long start = System.currentTimeMillis();
         Object object = point.proceed();
         long times = System.currentTimeMillis() - start;
-        log.info("执行方法耗时：{} ", times);
+        log.info("执行方法耗时：{} {}", times,"毫秒");
         return object;
     }
 

@@ -14,4 +14,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class SystemProperties {
 
     private DruidProperties druid = new DruidProperties();
+    private CorsProperties cors = new CorsProperties();
 }
