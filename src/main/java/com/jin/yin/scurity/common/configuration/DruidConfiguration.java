@@ -1,4 +1,4 @@
-package com.jin.yin.scurity.common.configration;
+package com.jin.yin.scurity.common.configuration;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
@@ -19,7 +19,7 @@ import javax.sql.DataSource;
  * @Description: druid配置
  */
 @Configuration
-public class DruidConfigration {
+public class DruidConfiguration {
 
     @Autowired
     private SystemProperties systemProperties;
@@ -42,7 +42,7 @@ public class DruidConfigration {
         filterRegistrationBean.setFilter(webStatFilter);
 
         filterRegistrationBean.addUrlPatterns("/*");
-        filterRegistrationBean.addInitParameter("exclusions","*.css,*.js,/druid/*");
+        filterRegistrationBean.addInitParameter("exclusions","*.css,*.html,*.js,/druid/*");
         return filterRegistrationBean;
     }
 

@@ -1,4 +1,4 @@
-package com.jin.yin.scurity.common.configration;
+package com.jin.yin.scurity.common.configuration;
 
 import com.jin.yin.scurity.common.constants.properties.SystemProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -11,5 +11,5 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @EnableConfigurationProperties(SystemProperties.class)
-public class PropertiesConfigration {
+public class PropertiesConfiguration {
 }
