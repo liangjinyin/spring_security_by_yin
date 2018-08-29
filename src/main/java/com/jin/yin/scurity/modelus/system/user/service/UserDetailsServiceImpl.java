@@ -4,6 +4,7 @@ import com.jin.yin.scurity.modelus.system.role.dao.RoleDao;
 import com.jin.yin.scurity.modelus.system.role.entity.Role;
 import com.jin.yin.scurity.modelus.system.user.dao.UserDao;
 import com.jin.yin.scurity.modelus.system.user.entity.User;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,6 +14,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.social.security.SocialUser;
+import org.springframework.social.security.SocialUserDetails;
+import org.springframework.social.security.SocialUserDetailsService;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -26,7 +30,8 @@ import java.util.List;
  * @Description:
  */
 @Component
-public class UserDetailsServiceImpl implements UserDetailsService {
+@Slf4j
+public class UserDetailsServiceImpl implements UserDetailsService, SocialUserDetailsService {
 
 
     @Autowired
@@ -35,17 +40,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private RoleDao roleDao;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userDao.findUserByUserName(username);
-        if (user != null) {
-            return new org.springframework.security.core.userdetails.User(
-                    username, passwordEncoder.encode(user.getPassword()),
-                    AuthorityUtils.commaSeparatedStringToAuthorityList("admin,super"));
-        } else {
-            throw new UsernameNotFoundException(username);
-        }
-
+        log.info("表单登陆，登陆名称：{}", username);
+        return checkUser(username);
     }
 
     /**
@@ -68,5 +67,28 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             }
         }
         return auths;
+    }
+
+
+    @Override
+    public SocialUserDetails loadUserByUserId(String username) throws UsernameNotFoundException {
+        log.info("qq登陆，登陆用户名：{}",username);
+        return checkUser(username);
+    }
+
+    /**
+     * 校验用户是否存在并配置用户的权限
+     * @param param
+     * @return
+     */
+    private SocialUserDetails checkUser(String param){
+        User user = userDao.findUserByUserName(param);
+        if (user != null) {
+            return new SocialUser(
+                    user.getUsername(), passwordEncoder.encode(user.getPassword()),
+                    AuthorityUtils.commaSeparatedStringToAuthorityList("admin,super"));
+        } else {
+            throw new UsernameNotFoundException(user.getUsername());
+        }
     }
 }

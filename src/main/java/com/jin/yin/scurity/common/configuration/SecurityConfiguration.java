@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.social.security.SpringSocialConfigurer;
 
 /**
  * @author: liangjinyin
@@ -21,30 +22,38 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private LoginHandler loginHandler;
 
+    @Autowired
+    private SpringSocialConfigurer springSocialConfigurer;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+
         http.csrf().disable()
-            .authorizeRequests()
+                .apply(springSocialConfigurer)
+                .and()
+                .authorizeRequests()
                 //.antMatchers("/druid/*","/user/*")
                 .antMatchers("/druid/*")
                 .permitAll()
-            .and()
-            .formLogin()
+                .and()
+                .formLogin()
                 .loginPage("/login.html")
                 .loginProcessingUrl("/authentication/form")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .successHandler(loginHandler)
                 .failureHandler(loginHandler)
-            .and()
-            .authorizeRequests()
-            .antMatchers("/login.html").permitAll()
-            .anyRequest()
-            .authenticated()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/login.html").permitAll()
+                .anyRequest()
+                .authenticated()
 
         ;
     }

@@ -46,7 +46,7 @@ public class DruidConfiguration {
         return filterRegistrationBean;
     }
 
-    @Bean
+    @Bean(name = "druidDataSource")
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource(){
         DruidDataSource druidDataSource = new DruidDataSource();

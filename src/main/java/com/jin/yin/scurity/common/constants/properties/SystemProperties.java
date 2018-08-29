@@ -15,4 +15,5 @@ public class SystemProperties {
 
     private DruidProperties druid = new DruidProperties();
     private CorsProperties cors = new CorsProperties();
+    private SocialProperty social = new SocialProperty();
 }

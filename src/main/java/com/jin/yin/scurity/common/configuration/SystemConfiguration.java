@@ -21,9 +21,9 @@ public class SystemConfiguration extends WebMvcConfigurationSupport {
     protected void addInterceptors(InterceptorRegistry registry) {
 
         /** 自定义一个拦截器拦截所有的url并用日志记录url的参数信息*/
-        registry.addInterceptor(paramInterceptor)
+        /*registry.addInterceptor(paramInterceptor)
                 //.excludePathPatterns("/*.html")
-                .addPathPatterns("/**");
+                .addPathPatterns("/**");*/
         super.addInterceptors(registry);
     }
 
