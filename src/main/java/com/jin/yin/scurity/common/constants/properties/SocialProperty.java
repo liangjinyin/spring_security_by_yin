@@ -11,4 +11,6 @@ import lombok.Data;
 public class SocialProperty {
 
     private QQProperties qqps = new QQProperties();
+
+    private WXProperty wxps = new WXProperty();
 }

@@ -1,11 +1,16 @@
 package com.jin.yin.scurity.common.aspect;
 
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 
@@ -27,13 +32,17 @@ public class ParamAspect {
      */
     @Around("execution(* com.jin.yin.scurity.modelus.system..*Controller.*(..))")
     public Object paramHandle(ProceedingJoinPoint point) throws Throwable {
-        //或去执行方法和参数
+        ServletRequestAttributes sra = (ServletRequestAttributes)RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = sra.getRequest();
+        log.info("request url={}, params={}, queryString={}",request.getRequestURI(), JSON.toJSONString(request.getParameterMap()),request.getQueryString());
+
+        /*//或去执行方法和参数
         log.info("执行方法为：{}" ,
                 point.getSignature().getDeclaringTypeName() +
                         "." + point.getSignature().getName());
-        log.info("参数为：{}" , Arrays.toString(point.getArgs()));
+        log.info("参数为：{}" , Arrays.toString(point.getArgs()));*/
 
-        //获取方法执行时间
+       /** 获取方法执行时间*/
         long start = System.currentTimeMillis();
         Object object = point.proceed();
         long times = System.currentTimeMillis() - start;
