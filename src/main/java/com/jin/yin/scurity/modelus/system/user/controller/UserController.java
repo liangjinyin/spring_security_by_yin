@@ -1,6 +1,7 @@
 package com.jin.yin.scurity.modelus.system.user.controller;
 
 import com.jin.yin.scurity.common.bmould.controller.BaseController;
+import com.jin.yin.scurity.common.bmould.entity.PageQuery;
 import com.jin.yin.scurity.modelus.security.qq.entity.SocialUserInfo;
 import com.jin.yin.scurity.modelus.system.user.entity.User;
 import com.jin.yin.scurity.modelus.system.user.service.UserService;
@@ -79,5 +80,11 @@ public class UserController extends BaseController {
     @GetMapping("/me")
     public Object getCurrentUser(@AuthenticationPrincipal UserDetails user) {
         return user;
+    }
+
+    @GetMapping("get/user")
+    public String getUserByParam(PageQuery query){
+        query.get("");
+        return result();
     }
 }

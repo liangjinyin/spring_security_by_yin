@@ -11,9 +11,9 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  */
 @SpringBootApplication
 @EnableAspectJAutoProxy
-public class ScurityApplication {
+public class SecurityApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ScurityApplication.class, args);
+		SpringApplication.run(SecurityApplication.class, args);
 	}
 }

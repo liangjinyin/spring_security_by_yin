@@ -30,7 +30,7 @@ public class ParamAspect {
      * @return object
      * @throws Throwable 查重
      */
-    @Around("execution(* com.jin.yin.scurity.modelus.system..*Controller.*(..))")
+    @Around("execution(* com.jin.yin.scurity.modelus..*Controller.*(..))")
     public Object paramHandle(ProceedingJoinPoint point) throws Throwable {
         ServletRequestAttributes sra = (ServletRequestAttributes)RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = sra.getRequest();
