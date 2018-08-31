@@ -6,13 +6,13 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-
+/**
+ * @author: liangjinyin
+ * @date:  2018/8/30 15:03
+ * @description: 
+ */
 public class DateUtils extends org.apache.commons.lang3.time.DateUtils{
-    /**
-     * User: liangjinyin
-     * Date: 2018-08-07
-     * Time: 15:18
-     */
+
     private static String[] parsePatterns = { "yyyy-MM-dd",
             "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm", "yyyy-MM", "yyyy/MM/dd",
             "yyyy/MM/dd HH:mm:ss", "yyyy/MM/dd HH:mm", "yyyy/MM", "yyyy.MM.dd",

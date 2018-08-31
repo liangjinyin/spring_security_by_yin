@@ -1,7 +1,10 @@
 package com.jin.yin.scurity.modelus.customer.entity;
 
+import com.jin.yin.scurity.common.bmould.entity.BaseEntity;
 import com.jin.yin.scurity.common.utils.excel.ExcelField;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * @author: liangjinyin
@@ -9,7 +12,7 @@ import lombok.Data;
  * @Description:
  */
 @Data
-public class Customer {
+public class Customer extends BaseEntity implements Serializable{
 
     @ExcelField(title = "id",sort = 1)
     private Integer id;

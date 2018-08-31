@@ -4,7 +4,7 @@ import com.jin.yin.scurity.common.bmould.controller.BaseController;
 import com.jin.yin.scurity.common.enums.ResultCode;
 import com.jin.yin.scurity.common.utils.excel.ExportExcel;
 import com.jin.yin.scurity.modelus.customer.entity.Customer;
-import com.jin.yin.scurity.modelus.customer.service.CustomerService;
+import com.jin.yin.scurity.modelus.customer.service.TestService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,12 +25,17 @@ import java.util.List;
 @RequestMapping("/customer")
 public class CustomerController extends BaseController{
 
-    @Autowired
+  /*  @Autowired
     private CustomerService customerService;
+*/
+    @Autowired
+    private TestService customerService;
 
     @GetMapping("/findList")
     public String findCustomerList(){
-        data = customerService.findList();
+
+        List<Customer> list = customerService.findList();
+        data = list;
         return result();
     }
 

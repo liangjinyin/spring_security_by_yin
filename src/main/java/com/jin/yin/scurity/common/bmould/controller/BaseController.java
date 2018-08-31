@@ -59,8 +59,11 @@ public abstract class BaseController {
         status.put("msg", resCode.getResultMsg());
         result.put("status", status);
 
-        return JSON.toJSONString(result, SerializerFeature.DisableCircularReferenceDetect,
-                SerializerFeature.WriteMapNullValue);
+        return JSON.toJSONString(result);
+
+        /*return JSON.toJSONString(result, SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteMapNullValue);*/
+       /*return result.toString();*/
     }
 
     public static void writeResponse(HttpServletResponse response, ResultCode result) throws IOException {

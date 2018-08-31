@@ -1,5 +1,6 @@
 package com.jin.yin.scurity.modelus.customer.dao;
 
+import com.jin.yin.scurity.common.bmould.dao.BaseDao;
 import com.jin.yin.scurity.modelus.customer.entity.Customer;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -13,11 +14,28 @@ import java.util.List;
  * @Description:
  */
 @Mapper
-public interface CustomerDao {
+public interface CustomerDao extends BaseDao<Customer>{
 
-    @Select("Select id,name,address,phone from sys_customer where flag = 0")
+/*    @Select("Select id,name,address,phone from sys_customer where flag = 0")
     List<Customer> findList();
 
     @Select("Select id,name,address,phone from sys_customer where flag = 0 and id = ${id}")
-    Customer findById(@Param("id") Integer id);
+    Customer findById(@Param("id") Integer id);*/
+
+    @Override
+    @Select("Select id,name,address,phone from sys_customer where flag = 0 and id = ${id}")
+    Customer findById(Integer id);
+
+    @Override
+    @Select("Select id,name,address,phone from sys_customer where flag = 0")
+    List<Customer> findList();
+
+    @Override
+    Boolean update(Customer entity);
+
+    @Override
+    Boolean delete(Integer id);
+
+    @Override
+    Boolean insert(Customer entity);
 }

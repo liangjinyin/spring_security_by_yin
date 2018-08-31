@@ -13,14 +13,14 @@ import java.util.Map;
 /**
  * @author liangjinyin
  * @date 20180813
- * @description
+ * @description 权限控制service层
  */
-@Service
 @Transactional(readOnly = true, rollbackFor = Exception.class)
-@Slf4j
 public abstract class BaseService {
 
     protected int total = 0;
     protected Map<String, Object> data = new HashMap();
     protected List<Map<String, Object>> temp = null;
+
+
 }
