@@ -1,6 +1,8 @@
 package com.jin.yin.scurity.common.configuration;
 
 import com.jin.yin.scurity.common.interceptor.LoginHandler;
+import com.jin.yin.scurity.modelus.security.validate.sms.config.SmsCodeFilter;
+import com.jin.yin.scurity.modelus.security.validate.sms.config.ValidateCodeSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.social.security.SpringSocialConfigurer;
 
 /**
@@ -24,6 +27,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private SpringSocialConfigurer springSocialConfigurer;
+    @Autowired
+    private ValidateCodeSecurityConfig validateCodeSecurityConfig;
+    @Autowired
+    private SmsCodeFilter smsCodeFilter;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -32,15 +39,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
-
-        http.csrf().disable()
+        http.addFilterBefore(smsCodeFilter, UsernamePasswordAuthenticationFilter.class)
                 .apply(springSocialConfigurer)
                 .and()
-                .authorizeRequests()
-                //.antMatchers("/druid/*","/user/*")
-                .antMatchers("/druid/*","/customer/**")
-                .permitAll()
+                .apply(validateCodeSecurityConfig)
                 .and()
                 .formLogin()
                 .loginPage("/login.html")
@@ -51,10 +53,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .failureHandler(loginHandler)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/login.html").permitAll()
+                .antMatchers("/login.html","/druid/*", "/customer/**", "/sms/*").permitAll()
                 .anyRequest()
                 .authenticated()
-
+                .and()
+                .csrf().disable()
         ;
     }
 }

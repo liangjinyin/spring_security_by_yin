@@ -1,7 +1,7 @@
 package com.jin.yin.scurity.modelus.system.user.entity;
 
 import lombok.Data;
-
+import org.hibernate.validator.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
@@ -19,10 +19,11 @@ public class User implements Serializable {
     @NotNull(message = "用户名不能为空")
     private String username;
     /** 密码*/
-    //@NotBlank(message = "密码不能为空")
-    @NotNull(message = "密码不能为空")
+    @NotBlank(message = "密码不能为空")
     private String password;
     /** 用户角色*/
     private String roles;
-
+    @NotBlank
+    /** 手机号*/
+    private String mobile;
 }

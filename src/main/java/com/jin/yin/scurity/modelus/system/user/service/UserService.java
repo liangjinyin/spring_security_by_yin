@@ -19,6 +19,12 @@ public interface UserService {
     User findUserByUserName(String name);
 
     /**
+     * 根据手机号查找用户
+     * @param name
+     * @return
+     */
+    User findUserByMobile(String name);
+    /**
      * 根据用户id查找用户
      * @param id
      * @return

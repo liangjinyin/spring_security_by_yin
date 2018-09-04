@@ -30,6 +30,17 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
+    public User findUserByMobile(String name) {
+        User user = null;
+        try {
+            user = userDao.findUserByUserName(name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    @Override
     public Object finUserById(Integer id) {
         try {
             User user = userDao.findUserById(id);

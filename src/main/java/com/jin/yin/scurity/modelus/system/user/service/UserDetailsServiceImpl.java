@@ -1,5 +1,6 @@
 package com.jin.yin.scurity.modelus.system.user.service;
 
+import com.jin.yin.scurity.common.utils.AccountValidatorUtil;
 import com.jin.yin.scurity.modelus.system.role.dao.RoleDao;
 import com.jin.yin.scurity.modelus.system.role.entity.Role;
 import com.jin.yin.scurity.modelus.system.user.dao.UserDao;
@@ -82,7 +83,12 @@ public class UserDetailsServiceImpl implements UserDetailsService, SocialUserDet
      * @return
      */
     private SocialUserDetails checkUser(String param){
-        User user = userDao.findUserByUserName(param);
+        User user = null;
+        if (AccountValidatorUtil.isMobile(param)) {
+            user = userDao.findUserByMobile(param);
+        }else {
+            user = userDao.findUserByUserName(param);
+        }
         if (user != null) {
             return new SocialUser(
                     user.getUsername(), passwordEncoder.encode(user.getPassword()),

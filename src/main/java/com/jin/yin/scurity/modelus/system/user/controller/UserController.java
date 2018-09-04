@@ -2,7 +2,7 @@ package com.jin.yin.scurity.modelus.system.user.controller;
 
 import com.jin.yin.scurity.common.bmould.controller.BaseController;
 import com.jin.yin.scurity.common.bmould.entity.PageQuery;
-import com.jin.yin.scurity.modelus.security.qq.entity.SocialUserInfo;
+import com.jin.yin.scurity.modelus.security.social.qq.entity.SocialUserInfo;
 import com.jin.yin.scurity.modelus.system.user.entity.User;
 import com.jin.yin.scurity.modelus.system.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;

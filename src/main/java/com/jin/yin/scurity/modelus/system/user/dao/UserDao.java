@@ -14,13 +14,16 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface UserDao {
 
-    @Select("select id,username,password,role_ids roles from sys_user where flag = 0 and username = #{name}")
+    @Select("select id,username,password,role_ids roles,mobile from sys_user where flag = 0 and username = #{name}")
     User findUserByUserName(@Param("name")String username);
 
-    @Select("select id,username,password,role_ids roles from sys_user where flag = 0 and id = ${id}")
+    @Select("select id,username,password,role_ids roles,mobile from sys_user where flag = 0 and id = ${id}")
     User findUserById(@Param("id") Integer id);
 
-    @Insert("insert into sys_user(`username`,`password`,role_ids) " +
-            "values(#{username},#{password},#{roles})")
+    @Insert("insert into sys_user(`username`,`password`,role_ids,mobile) " +
+            "values(#{username},#{password},#{roles},#{mobile})")
     boolean insertUser(User user);
+
+    @Select("select id,username,password,role_ids roles,mobile from sys_user where flag = 0 and mobile = #{mobile}")
+    User findUserByMobile(@Param("mobile")String mobile);
 }
