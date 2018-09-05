@@ -1,6 +1,7 @@
 package com.jin.yin.security.common.configuration;
 
 import com.jin.yin.security.common.interceptor.LoginHandler;
+import com.jin.yin.security.models.security.session.MySessionStrategy;
 import com.jin.yin.security.models.security.validate.sms.config.SmsCodeFilter;
 import com.jin.yin.security.models.security.validate.sms.config.ValidateCodeSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private LoginHandler loginHandler;
 
     @Autowired
+    private MySessionStrategy sessionStrategy;
+    @Autowired
     private SpringSocialConfigurer springSocialConfigurer;
     @Autowired
     private ValidateCodeSecurityConfig validateCodeSecurityConfig;
@@ -45,13 +48,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .apply(validateCodeSecurityConfig)
                 .and()
                 .sessionManagement()
-                /** 当session失效的时候跳转的url*/
-                .invalidSessionUrl("")
-                /** 设置session的最大数量为1*/
+                /** 新的seeion踢下久的session*/
                 .maximumSessions(1)
-                    /** 当session的数量达到设置的数量时，会阻止*/
-                    .maxSessionsPreventsLogin(true)
-                    .and()
+                .expiredSessionStrategy(sessionStrategy)
+                .and()
+
+                /** 当session失效的时候跳转的url*/
+                .invalidSessionUrl("/user/session/invalidate")
+                /** 设置session的最大数量为1*/
+//                .maximumSessions(1)
+                    /** 当session的数量达到设置的数量时，会阻止新的session登陆*/
+//                    .maxSessionsPreventsLogin(true)
+//                    .and()
                 .and()
                 .formLogin()
                 .loginPage("/login.html")
@@ -62,7 +70,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .failureHandler(loginHandler)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/login.html","/druid/*", "/customer/**", "/sms/*").permitAll()
+                .antMatchers("/login.html","/druid/*", "/customer/**", "/sms/*","/user/session/invalidate").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

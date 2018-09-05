@@ -2,6 +2,7 @@ package com.jin.yin.security.models.system.user.controller;
 
 import com.jin.yin.security.common.bmould.controller.BaseController;
 import com.jin.yin.security.common.bmould.entity.PageQuery;
+import com.jin.yin.security.common.enums.ResultCode;
 import com.jin.yin.security.models.security.social.qq.entity.SocialUserInfo;
 import com.jin.yin.security.models.system.user.entity.User;
 import com.jin.yin.security.models.system.user.service.UserService;
@@ -43,6 +44,7 @@ public class UserController extends BaseController {
     @GetMapping("/get/{id}")
     public String finUserById(@PathVariable("id") Integer id){
         data = userService.finUserById(id);
+        resCode = ResultCode.OPERATION_SUCCESSED;
         return result();
     }
 
@@ -82,9 +84,9 @@ public class UserController extends BaseController {
         return user;
     }
 
-    @GetMapping("get/user")
-    public String getUserByParam(PageQuery query){
-        query.get("");
+    @GetMapping("/session/invalidate")
+    public String sessionInvalidate(){
+        resCode = ResultCode.SESSION_INVALID;
         return result();
     }
 }

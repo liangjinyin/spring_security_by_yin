@@ -25,20 +25,20 @@ public abstract class BaseController {
     protected Object data = null;
 
 
-  /*  public String Result() {
-        Map<String, Object> result = new HashMap(16);
-        Map<String, Object> status = new HashMap(16);
-        if (resCode == null) {
-            resCode = ResultCode.NONE;// 没有意义的数据
-        }
-        result.put("data", data);
-        status.put("code", resCode.getResultCode());
-        status.put("msg", resCode.getResultMsg());
-        result.put("status", status);
-
-        return JSON.toJSONString(result, SerializerFeature.DisableCircularReferenceDetect,
-                SerializerFeature.WriteMapNullValue);
-    }*/
+//    public String Result() {
+//        Map<String, Object> result = new HashMap(16);
+//        Map<String, Object> status = new HashMap(16);
+//        if (resCode == null) {
+//            resCode = ResultCode.NONE;// 没有意义的数据
+//        }
+//        result.put("data", data);
+//        status.put("code", resCode.getResultCode());
+//        status.put("msg", resCode.getResultMsg());
+//        result.put("status", status);
+//
+//        return JSON.toJSONString(result, SerializerFeature.DisableCircularReferenceDetect,
+//                SerializerFeature.WriteMapNullValue);
+//    }
 
     public String result() {
         Map<String, Object> result = new HashMap(8);
