@@ -1,12 +1,11 @@
 package com.jin.yin.security.models.system.user.service;
 
 import com.jin.yin.security.common.utils.AccountValidatorUtil;
+import com.jin.yin.security.common.utils.CollectionsUtils;
 import com.jin.yin.security.models.system.role.dao.RoleDao;
-import com.jin.yin.security.models.system.role.entity.Role;
 import com.jin.yin.security.models.system.user.dao.UserDao;
 import com.jin.yin.security.models.system.user.entity.User;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -21,8 +20,8 @@ import org.springframework.social.security.SocialUserDetailsService;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -51,21 +50,19 @@ public class UserDetailsServiceImpl implements UserDetailsService, SocialUserDet
     /**
      * 获取用户对应的权限
      *
-     * @param roles
+     * @param resourceIds
      * @return
      */
-    private List<GrantedAuthority> getGrantedAuthority(String roles) {
+    private List<GrantedAuthority> getGrantedAuthority(Set<Integer> resourceIds) {
         List<GrantedAuthority> auths = new ArrayList<>();
         List<String> authKeys = null;
-        if (StringUtils.isNotEmpty(roles)) {
-            List<Role> roleList = roleDao.findRoleListByIds(roles);
-            for (Role role : roleList) {
-                String[] os = role.getOffices().split(",");
-                authKeys = Arrays.asList(os);
-                for (String keys : authKeys) {
+        if (!CollectionsUtils.isEmpty(resourceIds)) {
+            String reids = CollectionsUtils.convertToString(resourceIds, ",");
+
+            for (String keys : authKeys) {
                     auths.add(new SimpleGrantedAuthority(keys));
                 }
-            }
+
         }
         return auths;
     }

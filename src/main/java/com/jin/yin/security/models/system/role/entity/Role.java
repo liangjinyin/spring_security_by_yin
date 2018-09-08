@@ -3,6 +3,8 @@ package com.jin.yin.security.models.system.role.entity;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author: liangjinyin
@@ -17,6 +19,8 @@ public class Role implements Serializable {
     private String name;
     /** 角色的数据范围*/
     private String dataScope;
-    /** 角色关联的权限*/
-    private String offices;
+    /** 角色关联的资源*/
+    private Set<RoleResource> resources  = new HashSet();
+    /** 角色下的用户*/
+    private Set<RoleUser> users = new HashSet();
 }

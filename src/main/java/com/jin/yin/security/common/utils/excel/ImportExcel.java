@@ -332,7 +332,7 @@ public class ImportExcel {
 							val=sdf.parse(val.toString()); 
 						/*}else if (valType == User.class){
 							val = UserUtils.getByUserName(val.toString());
-						}else if (valType == Office.class){
+						}else if (valType == Resource.class){
 							val = UserUtils.getByOfficeName(val.toString());
 						}else if (valType == Area.class){
 							val = UserUtils.getByAreaName(val.toString());*/
