@@ -29,14 +29,14 @@ public class User implements Serializable {
     @NotBlank(message = "密码不能为空")
     private String password;
     /** 用户角色关系*/
-    private Set<RoleUser> roles = new HashSet();
+    private Set<RoleUser> roleUsers = new HashSet();
     /** 用户的资源*/
     private Set<Integer> resourceIds = new HashSet<>();
     @NotBlank
     /** 手机号*/
     private String mobile;
 
-    public Set<Integer> getAllResourceIds(){
+   /* public Set<Integer> getAllResourceIds(){
         forEachResource(resource -> resourceIds.add(resource.getId()));
         return resourceIds;
     }
@@ -47,5 +47,5 @@ public class User implements Serializable {
                 consumer.accept(resource.getResource());
             }
         }
-    }
+    }*/
 }

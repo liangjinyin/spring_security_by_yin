@@ -13,9 +13,9 @@ public class RoleUser {
     /** 唯一标识*/
     private Integer id;
     /** userID*/
-    private User user;
+    private Integer userId;
     /** roleid*/
-    private Role role;
+    private Integer roleId;
     /** 备注*/
     private String remark;
 

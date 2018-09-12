@@ -14,6 +14,6 @@ public class Pageable implements Serializable{
 
     private Integer pageSize = 10;
     private Integer index = 1;
-    private String sortValue = "id";
+    private String sortParam = "id";
     private String sort = "DESC";
 }

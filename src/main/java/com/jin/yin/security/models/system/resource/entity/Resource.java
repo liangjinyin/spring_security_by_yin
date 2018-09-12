@@ -25,37 +25,31 @@ public class Resource implements Serializable {
      */
     private String name;
     /**
-     * 权限类型
+     * 权限url
      */
-    private String type;
+    private String url;
     /**
      * 权限等级
      */
     private String grade;
+    /** 菜单顺序*/
+    private Integer order;
     /**
-     * 父级资源
+     * 父级资源id
      */
-    private Resource parent;
+    private Integer parentId;
     /**
      * 子资源
      */
     private List<Resource> childes = new ArrayList();
 
 
-    public Resource toTree(User user) {
-        Set<Integer> resourceIds = user.getResourceIds();
+    public Resource toTree() {
         List<Resource> childes = new ArrayList();
         for (Resource child : getChildes()) {
-            if (StringUtils.equalsIgnoreCase(user.getUsername(), "admin") || resourceIds.contains(child.getId())) {
-                childes.add(child.toTree(user));
-            }
+                childes.add(child.toTree());
         }
         this.setChildes(childes);
         return this;
-    }
-
-    public void addChild(Resource child){
-        childes.add(child);
-        child.setParent(this);
     }
 }

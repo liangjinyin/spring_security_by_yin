@@ -1,5 +1,8 @@
 package com.jin.yin.security.common.bmould.entity;
 
+import com.jin.yin.security.common.enums.QueryEnum;
+import lombok.Data;
+
 import java.util.HashMap;
 
 /**
@@ -7,7 +10,10 @@ import java.util.HashMap;
  * @date:  2018/8/27 20:39
  * @description:
  */
+@Data
 public class PageQuery extends HashMap<String,Object>{
+
+    public PageQuery(){}
 
     /**
      * 构造类，例：new Parameter(id, parentIds)
@@ -34,4 +40,8 @@ public class PageQuery extends HashMap<String,Object>{
             }
         }
     }
+
+    private String name;
+
+    private String type;
 }

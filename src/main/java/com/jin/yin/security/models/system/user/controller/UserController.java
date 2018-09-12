@@ -2,6 +2,7 @@ package com.jin.yin.security.models.system.user.controller;
 
 import com.jin.yin.security.common.bmould.controller.BaseController;
 import com.jin.yin.security.common.bmould.entity.PageQuery;
+import com.jin.yin.security.common.bmould.entity.Pageable;
 import com.jin.yin.security.common.enums.ResultCode;
 import com.jin.yin.security.models.security.social.qq.entity.SocialUserInfo;
 import com.jin.yin.security.models.system.user.entity.User;
@@ -48,7 +49,7 @@ public class UserController extends BaseController {
         return result();
     }
 
-    @PostMapping("/addUser")
+    @PostMapping("/add")
     public String registUser(@Validated User user,BindingResult bindingResult){
         if(bindingResult.hasErrors()) {
             setErrorResultCode(bindingResult);
@@ -84,9 +85,31 @@ public class UserController extends BaseController {
         return user;
     }
 
+    /**
+     * 当session失效时跳转处理
+     * @return
+     */
     @GetMapping("/session/invalidate")
     public String sessionInvalidate(){
         resCode = ResultCode.SESSION_INVALID;
         return result();
     }
+
+    @PostMapping("/update")
+    public String updateUser(@Validated User user,BindingResult bindingResult){
+        if(bindingResult.hasErrors()) {
+            setErrorResultCode(bindingResult);
+        }else{
+            data = userService.updateUser(user);
+        }
+        return result();
+    }
+
+    @GetMapping("/list")
+    public String getUserList(Pageable pageable,PageQuery pageQuery){
+        data = userService.getUserList(pageable,pageQuery);
+        return result();
+    }
+
+    
 }

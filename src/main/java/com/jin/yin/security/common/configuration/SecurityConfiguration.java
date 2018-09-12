@@ -47,20 +47,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .apply(validateCodeSecurityConfig)
                 .and()
-                .sessionManagement()
-                /** 新的seeion踢下久的session*/
-                .maximumSessions(1)
-                .expiredSessionStrategy(sessionStrategy)
-                .and()
+//                .sessionManagement()
+//                /** 新的seeion踢下久的session*/
+//                .maximumSessions(1)
+//                .expiredSessionStrategy(sessionStrategy)
+//                .and()
 
                 /** 当session失效的时候跳转的url*/
-                .invalidSessionUrl("/user/session/invalidate")
+//                .invalidSessionUrl("/user/session/invalidate")
                 /** 设置session的最大数量为1*/
 //                .maximumSessions(1)
                     /** 当session的数量达到设置的数量时，会阻止新的session登陆*/
 //                    .maxSessionsPreventsLogin(true)
 //                    .and()
-                .and()
+//                .and()
                 .formLogin()
                 .loginPage("/login.html")
                 .loginProcessingUrl("/authentication/form")
@@ -70,7 +70,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .failureHandler(loginHandler)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/login.html","/druid/*", "/customer/**", "/sms/*","/user/session/invalidate").permitAll()
+                //.antMatchers("/login.html","/druid/*", "/customer/**", "/sms/*","/user/session/invalidate").permitAll()
+                .antMatchers("/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

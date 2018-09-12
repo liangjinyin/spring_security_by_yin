@@ -1,5 +1,7 @@
 package com.jin.yin.security.models.system.user.service;
 
+import com.jin.yin.security.common.bmould.entity.PageQuery;
+import com.jin.yin.security.common.bmould.entity.Pageable;
 import com.jin.yin.security.models.system.user.entity.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
  * @Date: 2018-08-23
  * @Description:
  */
-@Service
 public interface UserService {
     /**
      * 根据用户名查找用户
@@ -38,4 +39,15 @@ public interface UserService {
      */
     @Transactional(rollbackFor = Exception.class)
     Object insertUser(User user);
+
+
+    /**
+     * 修改user
+     * @param user
+     * @return
+     */
+    @Transactional(rollbackFor = Exception.class)
+    Object updateUser(User user);
+
+    Object getUserList(Pageable pageable, PageQuery pageQuery);
 }

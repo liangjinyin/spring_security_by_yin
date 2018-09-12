@@ -13,9 +13,10 @@ public class RoleResource {
     /** id 唯一标识*/
     private Integer id;
     /** 角色id*/
-    private Role role;
+    private Integer roleId;
     /** 资源id*/
-    private Resource resource;
+    private Integer resourceId;
     /** 备注*/
     private String remark;
+
 }

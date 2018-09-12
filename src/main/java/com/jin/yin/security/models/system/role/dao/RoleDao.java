@@ -1,9 +1,8 @@
 package com.jin.yin.security.models.system.role.dao;
 
 import com.jin.yin.security.models.system.role.entity.Role;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
+import org.springframework.security.access.method.P;
 
 import java.util.List;
 
@@ -14,6 +13,19 @@ import java.util.List;
  */
 @Mapper
 public interface RoleDao {
-    @Select("select id,name from sys_role where flag = 0 and id in (#{ids})")
-    List<Role> findRoleListByIds(@Param("ids") String ids);
+
+    @Select("select * from sys_role where flag = 0 ${sql}")
+    List<Role> findRoleList(@Param("sql") String sql);
+
+    @Select("select * from sys_role where flag = 0 and id = ${id}")
+    Role findRoleById(@Param("id") String id);
+
+    @Update("update sys_role set flag = 1 where id = ${id }")
+    boolean deleteRoleById(@Param("id") String id);
+
+    @Delete("delete from sys_role_resource where role_id = ${id}")
+    boolean deleteRoleResource(@Param("id") String id);
+
+    @Insert("insert into sys_role_resource (role_id,resource_id )values(${roleId},${resourceId})")
+    boolean saveRoleResource(@Param("roleId") String roleId, @Param("resourceId")String resourceId);
 }

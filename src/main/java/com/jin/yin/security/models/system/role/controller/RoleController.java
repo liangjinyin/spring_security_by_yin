@@ -1,10 +1,12 @@
 package com.jin.yin.security.models.system.role.controller;
 
 import com.jin.yin.security.common.bmould.controller.BaseController;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.jin.yin.security.common.bmould.entity.PageQuery;
+import com.jin.yin.security.common.bmould.entity.Pageable;
+import com.jin.yin.security.models.system.role.service.RoleService;
+import org.apache.ibatis.annotations.Delete;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author: liangjinyin
@@ -15,11 +17,42 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/role",produces = "application/json;charset=utf-8")
 public class RoleController extends BaseController {
 
-    @GetMapping("/findList/{ids}")
-    public String findRoleList(@PathVariable("ids") String ids){
+    @Autowired
+    private RoleService roleService;
 
+    @GetMapping("/findList")
+    public String findRoleList(Pageable pageable, PageQuery pageQuery){
+        data = roleService.findRoleList(pageable,pageQuery);
         return result();
     }
 
+    @GetMapping("/find/{id}")
+    public String findRoleById(@PathVariable("id") String id){
+        data = roleService.findRoleById(id);
+        return result();
+    }
 
+    @DeleteMapping("/delete/{id}")
+    public String deleteRoleById(@PathVariable("id")String id){
+        data = roleService.deleteRoleById(id);
+        return result();
+    }
+
+    @GetMapping("/{id}/resource")
+    public String findRoleResource(@PathVariable("id")String id) {
+        data = roleService.findRoleResource(id);
+        return result();
+    }
+
+    /**
+     * 创建角色资源关系
+     * @param id 角色id
+     * @param ids 资源id
+     * @return
+     */
+    @PostMapping("/{id}/resource")
+    public String createRoleResource(@PathVariable("id")String id,@RequestBody String ids){
+        data = roleService.createRoleResource(id,ids);
+        return result();
+    }
 }

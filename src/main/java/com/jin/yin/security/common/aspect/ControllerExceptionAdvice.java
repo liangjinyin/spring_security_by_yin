@@ -16,7 +16,7 @@ import java.util.Map;
  * @Description:
  */
 @ControllerAdvice(basePackages = "com.jin.yin.security.models.*.controller")
-public class ExceptionAdvice {
+public class ControllerExceptionAdvice {
 
     @ExceptionHandler(Exception.class)/** 此处可以加自定义异常*/
     @ResponseBody

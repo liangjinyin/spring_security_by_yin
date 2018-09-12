@@ -3,12 +3,7 @@
  */
 package com.jin.yin.security.common.utils;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.jin.yin.security.common.utils.excel.Reflections;
 import org.apache.commons.beanutils.PropertyUtils;
@@ -19,7 +14,7 @@ import org.apache.commons.lang3.StringUtils;
  * @date:  2018/9/7 16:30
  * @description:  Collections工具集.
  */
-public class CollectionsUtils {
+public class MyCollectionsUtils {
 
 	/**
 	 * 提取集合中的对象的两个属性(通过Getter函数), 组合成Map.
@@ -63,6 +58,27 @@ public class CollectionsUtils {
 		}
 
 		return list;
+	}
+
+	/**
+	 * 提取集合中的对象的一个属性(通过Getter函数), 组合成List.
+	 *
+	 * @param collection 来源集合.
+	 * @param propertyName 要提取的属性名.
+	 */
+	@SuppressWarnings("unchecked")
+	public static Set extractToSet(final Collection collection, final String propertyName) {
+		Set set = new HashSet(collection.size());
+
+		try {
+			for (Object obj : collection) {
+				set.add(PropertyUtils.getProperty(obj, propertyName));
+			}
+		} catch (Exception e) {
+			throw Reflections.convertReflectionExceptionToUnchecked(e);
+		}
+
+		return set;
 	}
 
 	/**

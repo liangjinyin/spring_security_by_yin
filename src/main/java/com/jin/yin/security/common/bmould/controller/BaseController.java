@@ -2,6 +2,7 @@ package com.jin.yin.security.common.bmould.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.jin.yin.security.common.enums.ResultCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
@@ -58,10 +59,10 @@ public abstract class BaseController {
         status.put("msg", resCode.getResultMsg());
         result.put("status", status);
 
-        return JSON.toJSONString(result);
+        /*return JSON.toJSONString(result);*/
 
-        /*return JSON.toJSONString(result, SerializerFeature.DisableCircularReferenceDetect,
-                SerializerFeature.WriteMapNullValue);*/
+        return JSON.toJSONString(result, SerializerFeature.DisableCircularReferenceDetect,
+                SerializerFeature.WriteMapNullValue);
        /*return result.toString();*/
     }
 

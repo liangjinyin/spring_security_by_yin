@@ -1,7 +1,7 @@
 package com.jin.yin.security.models.system.user.service;
 
 import com.jin.yin.security.common.utils.AccountValidatorUtil;
-import com.jin.yin.security.common.utils.CollectionsUtils;
+import com.jin.yin.security.common.utils.MyCollectionsUtils;
 import com.jin.yin.security.models.system.role.dao.RoleDao;
 import com.jin.yin.security.models.system.user.dao.UserDao;
 import com.jin.yin.security.models.system.user.entity.User;
@@ -56,8 +56,8 @@ public class UserDetailsServiceImpl implements UserDetailsService, SocialUserDet
     private List<GrantedAuthority> getGrantedAuthority(Set<Integer> resourceIds) {
         List<GrantedAuthority> auths = new ArrayList<>();
         List<String> authKeys = null;
-        if (!CollectionsUtils.isEmpty(resourceIds)) {
-            String reids = CollectionsUtils.convertToString(resourceIds, ",");
+        if (!MyCollectionsUtils.isEmpty(resourceIds)) {
+            String reids = MyCollectionsUtils.convertToString(resourceIds, ",");
 
             for (String keys : authKeys) {
                     auths.add(new SimpleGrantedAuthority(keys));
