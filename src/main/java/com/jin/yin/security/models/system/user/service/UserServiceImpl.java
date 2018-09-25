@@ -64,6 +64,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
             }
             roleUserSet = userDao.findRoleUserByUserId(id);
             String roleIds = MyCollectionsUtils.extractToString(roleUserSet, "roleId", ",");
+            //roleUserSet.stream().map((RoleUser e, String s) -> String.format("%d,", e.getRoleId()));
             resourceIds = userDao.findUserResourcesByRoleId(roleIds);
             entity.setResourceIds(resourceIds);
             entity.setRoleUsers(roleUserSet);

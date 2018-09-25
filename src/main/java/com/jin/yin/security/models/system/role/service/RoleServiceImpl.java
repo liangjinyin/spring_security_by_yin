@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author: liangjinyin
@@ -58,7 +59,7 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
         try {
             Role role = (Role) validate(id);
             if (!MyCollectionsUtils.isEmpty(role.getUsers())) {
-                return ResultCode.createCustomResultCode("不能删除有下挂用户的角色!");
+                return ResultCode.createResultCodeByMeg("不能删除有下挂用户的角色!");
             }
             roleDao.deleteRoleById(id);
             return ResultCode.OPERATION_SUCCESSED;
@@ -72,7 +73,8 @@ public class RoleServiceImpl extends BaseService<Role> implements RoleService {
     public Object findRoleResource(String id) {
         try {
             Role role = (Role) validate(id);
-            Set resourceIds = MyCollectionsUtils.extractToSet(role.getResources(), "resourceId");
+           // Set resourceIds = MyCollectionsUtils.extractToSet(role.getResources(), "resourceId");
+            Set resourceIds = role.getResources().stream().map(e -> e.getResourceId()).collect(Collectors.toSet());
             data.put("resourceIds", resourceIds);
             return data;
         } catch (Exception e) {

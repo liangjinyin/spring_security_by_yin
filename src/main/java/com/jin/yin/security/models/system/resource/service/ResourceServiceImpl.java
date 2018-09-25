@@ -110,7 +110,7 @@ public class ResourceServiceImpl extends BaseService<Resource> implements Resour
     private Object validate(Integer id) {
         entity = resourceDao.findResourceById(id);
         if (entity == null) {
-            throw new ServiceException("资源不存在！");
+            throw new ServiceException(ResultCode.createResultCodeByMeg("资源不存在！"));
         }
         return entity;
     }

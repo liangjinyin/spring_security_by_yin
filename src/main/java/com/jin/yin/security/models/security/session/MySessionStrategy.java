@@ -20,6 +20,6 @@ public class MySessionStrategy extends BaseController implements SessionInformat
     @Override
     public void onExpiredSessionDetected(SessionInformationExpiredEvent event) throws IOException, ServletException {
         String message = String.format("登陆并发，由%s用户挤下线", event.getRequest().getHeader("user-agent"));
-        writeResponse(event.getResponse(),ResultCode.createCustomResultCode(message));
+        writeResponse(event.getResponse(),ResultCode.createResultCodeByMeg(message));
     }
 }

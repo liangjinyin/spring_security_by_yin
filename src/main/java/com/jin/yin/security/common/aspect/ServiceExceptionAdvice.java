@@ -21,10 +21,10 @@ public class ServiceExceptionAdvice {
 
     @ExceptionHandler(ServiceException.class)/** 此处可以加自定义异常*/
     @ResponseBody
-    public ResponseEntity handleException(Exception e){
+    public ResponseEntity handleException(ServiceException e){
         Map<String, Object> map = new HashMap(8);
         map.put("message", e.getMessage());
-        map.put("code", ResultCode.createCustomResultCode(e.getMessage()).getResultCode());
+        map.put("code",e.getCode());
         return new ResponseEntity(map, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

@@ -85,7 +85,7 @@ public abstract class BaseController {
 
     public void setErrorResultCode(BindingResult result) {
         List<ObjectError> list = result.getAllErrors();
-        resCode = ResultCode.createCustomResultCode(list.get(0).getDefaultMessage());
+        resCode = ResultCode.createResultCodeByMeg(list.get(0).getDefaultMessage());
         data = null;
     }
 

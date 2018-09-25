@@ -23,7 +23,7 @@ public class ControllerExceptionAdvice {
     public ResponseEntity handleException(Exception e){
         Map<String, Object> map = new HashMap(8);
         map.put("message", e.getMessage());
-        map.put("code", ResultCode.createCustomResultCode(e.getMessage()).getResultCode());
+        map.put("code", ResultCode.createResultCodeByMeg(e.getMessage()).getResultCode());
         return new ResponseEntity(map, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

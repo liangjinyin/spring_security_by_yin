@@ -15,7 +15,7 @@ public enum ResultCode {
     SESSION_INVALID("003", "会话已失效"),
     OPERATION_NOT_PERMITTED("004", "权限不足"),
     OPERATION_PARAM_ERROR("005", "数据格式错误"),
-    CUSTOM_ERROR("998", "{errmsg}"),
+    MODEL_ERROR("998", "{errmsg}"),
     NONE("999","无意义数据"),
 
     MOBILECODE_EXPIRED("1001", "验证码已失效"),
@@ -80,9 +80,10 @@ public enum ResultCode {
         }
         return ResultCode.NONE;
     }
-    public static ResultCode createCustomResultCode(String msg) {
-        ResultCode custom =  ResultCode.CUSTOM_ERROR;
-        custom.msg = msg;
-        return custom;
+    public static ResultCode createResultCodeByMeg(String msg) {
+        ResultCode error =  ResultCode.MODEL_ERROR;
+        error.msg = msg;
+        return error;
     }
+
 }
